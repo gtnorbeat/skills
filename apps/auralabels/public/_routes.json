@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "include": ["/api/*"],
+  "exclude": [
+    "/assets/*",
+    "/brand-assets/*",
+    "/fonts/*",
+    "/favicon.ico",
+    "/manifest.webmanifest",
+    "/robots.txt",
+    "/llms.txt",
+    "/sw.js",
+    "/_redirects",
+    "/_headers"
+  ]
+}

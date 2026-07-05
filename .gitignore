@@ -17,3 +17,9 @@ npm-debug.log*
 
 # Agent skills — local tooling, not versioned
 .agents/skills/
+
+# Generated / local noise
+docs-dist/
+log.txt
+apps/auralabels/test-results/
+handoff.md

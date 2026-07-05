@@ -1,0 +1,920 @@
+@import "tailwindcss";
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(100%) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+.animate-in-slide {
+  animation: slide-in-right 0.25s ease-out;
+}
+
+@font-face {
+  font-family: "Ethnocentric";
+  src: url("/fonts/Ethnocentric Light.woff2") format("woff2"),
+       url("/fonts/Ethnocentric Light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Geist (by Vercel) — geometric/technical variable sans-serif that
+   strengthens the AI-developer-tool aesthetic. Single 69 kB woff2
+   with `100 900` weight axis serves all four weights (400/500/600/700)
+   from one fetch with `font-display: swap`. Replaces Inter. */
+@font-face {
+  font-family: "Geist";
+  src: url("/fonts/Geist-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Ethnocentric", sans-serif;
+
+  --color-aura-cyan: #22d3ee;
+  --color-aura-cyan-muted: #0891b2;
+  --color-aura-cyan-dark: #155e75;
+  --color-aura-violet: #a78bfa;
+  --color-aura-violet-muted: #7c3aed;
+  --color-aura-violet-dark: #5b21b6;
+  --color-aura-magenta: #f472b6;
+  --color-aura-magenta-muted: #db2777;
+  --color-aura-neon: #38bdf8;
+  --color-aura-amber: #fbbf24;
+  --color-aura-lime: #a3e635;
+  --color-aura-surface: #09090b;
+  --color-aura-panel: #0c0c0f;
+  --color-aura-border: #1c1c24;
+  --color-aura-border-light: #2a2a35;
+  --color-aura-text: #e4e4e7;
+  --color-aura-text-muted: #71717a;
+  --color-aura-text-dim: #52525b;
+
+  --color-zinc-50: #fafafa;
+  --color-zinc-100: #f4f4f5;
+  --color-zinc-200: #e4e4e7;
+  --color-zinc-300: #d4d4d8;
+  --color-zinc-400: #a1a1aa;
+  --color-zinc-500: #71717a;
+  --color-zinc-600: #52525b;
+  --color-zinc-700: #3f3f46;
+  --color-zinc-800: #27272a;
+  --color-zinc-900: #18181b;
+  --color-zinc-950: #09090b;
+}
+
+/* Remove default border-color to avoid conflicts with v4 */
+*,
+::after,
+::before,
+::backdrop,
+::file-selector-button {
+  border-color: var(--color-zinc-800, currentColor);
+}
+
+/* Desktop type scale — bump rem units from the browser default 16 px to
+   17 px (106.25%) on lg+ viewports only, so every Tailwind text-* /
+   spacing rem value scales proportionally on desktop while mobile keeps
+   the canonical 16 px base for compact, touch-friendly sizing. The
+   baseline cap is +1 px on text-[10px] through text-3xl — visually
+   still "Impeccable touch" without individual component overrides. */
+@media (min-width: 1024px) {
+  html {
+    font-size: 106.25%;
+  }
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #e4dfd8;
+  color: var(--color-aura-text);
+  font-family: "Geist", ui-sans-serif, system-ui, sans-serif;
+  /* Tech dot grid — subtle 2px dots at 16px spacing for an IDE/technical
+     texture across every surface. Layered with the noise grain below. */
+  background-image:
+    radial-gradient(circle, rgba(0, 0, 0, 0.10) 1px, transparent 1px),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.7%25'/%3E%3C/svg%3E");
+  background-size: 16px 16px, auto;
+}
+
+/* ---------- AURA hero resting opacity token ---------- */
+
+/* --aura-hero-target-opacity is the canonical resting opacity for the
+   brand image across EVERY surface that uses AuraBrand as scenery:
+   the AppLayout static hero watermark (.aura-hero-bg .aura-hero-mark).
+   Single source of truth — explicit per-component inline-style
+   threading is no longer used. The var(...) fallbacks in any future
+   caller that hasn't migrated yet stay as load-bearing safety-nets. */
+:root {
+  --aura-hero-target-opacity: 0.12;
+}
+
+/* Custom scrollbar — matches new palette */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #1c1c24;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #2a2a35;
+}
+
+/* Typography — display letter-spacing sits at -0.02em (grotesque-tight,
+   the floor per the "impeccable" reference is -0.04em). Headings get
+   text-wrap: balance so multi-line h1/h2/h3 wrap with even line
+   lengths instead of "orphans" trailing the last-but-one line.
+   prose-flowing paragraphs cap line length at 75ch so eyes don't track
+   across a 200-character line. */
+h1, .font-display {
+  font-family: "Ethnocentric", sans-serif;
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+h2, .font-heading,
+h3 {
+  font-family: "Geist", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 600;
+  text-wrap: balance;
+}
+
+p, .font-body {
+  font-family: "Geist", ui-sans-serif, system-ui, sans-serif;
+  max-width: 75ch;
+}
+
+/* Selection */
+::selection {
+  background-color: rgba(34, 211, 238, 0.25);
+  color: #fff;
+}
+
+/* Neon glow utilities — Deepgram-inspired dual-layer glow rings.
+   All aura-* visual utilities defined via @utility (Tailwind v4
+   canonical path). Pseudo-class variants (e.g. :hover) go in
+   the @layer utilities section further down — @utility rejects
+   pseudo-class selectors in its name. */
+@utility aura-glow-cyan {
+  box-shadow: 0 0 20px rgba(34, 211, 238, 0.15), 0 0 60px rgba(34, 211, 238, 0.05);
+}
+@utility aura-glow-violet {
+  box-shadow: 0 0 20px rgba(167, 139, 250, 0.15), 0 0 60px rgba(167, 139, 250, 0.05);
+}
+@utility aura-glow-magenta {
+  box-shadow: 0 0 20px rgba(244, 114, 182, 0.15), 0 0 60px rgba(244, 114, 182, 0.05);
+}
+
+/* Hover glow — subtle cyan bloom when cards are hovered (AI feel).
+   Defined in @layer utilities so :hover pseudo works correctly
+   (Tailwind v4 @utility doesn't accept pseudo-classes in names). */
+@layer utilities {
+  .aura-hover-glow {
+    transition: box-shadow 0.3s ease;
+  }
+  .aura-hover-glow:hover {
+    box-shadow: 0 0 30px rgba(34, 211, 238, 0.1), 0 0 90px rgba(167, 139, 250, 0.04);
+  }
+
+  /* Card lift — subtle translateY + shadow on hover for tactile feedback.
+     Must be in @layer utilities (NOT @utility) because :hover pseudo
+     doesn't compile in Tailwind v4 @utility directives. Apply via
+     className="aura-card-lift" on any card/row you want to respond. */
+  .aura-card-lift {
+    transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .aura-card-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  }
+}
+
+/* Gradient bloom orbs — used behind hero / CTAs for that "AI depth"
+   layer. Large radial gradients that sit at low opacity behind content.
+   Deepgram places these behind their main hero CTA; we place one cyan
+   and one violet orb offset from each other for a branded bloom.
+
+   Two sets:
+   · aura-bloom-* — cyan/violet/magenta blooms on dark backgrounds (default)
+   · aura-bloom-*-light — muted version for white/light backgrounds */
+@utility aura-bloom-cyan {
+  background: radial-gradient(ellipse 60% 60% at 30% 50%, rgba(34, 211, 238, 0.06) 0%, transparent 70%);
+}
+@utility aura-bloom-violet {
+  background: radial-gradient(ellipse 50% 50% at 70% 50%, rgba(167, 139, 250, 0.05) 0%, transparent 70%);
+}
+@utility aura-bloom-magenta {
+  background: radial-gradient(ellipse 50% 40% at 50% 60%, rgba(244, 114, 182, 0.04) 0%, transparent 70%);
+}
+@utility aura-bloom-cyan-light {
+  background: radial-gradient(ellipse 60% 60% at 30% 50%, rgba(34, 211, 238, 0.04) 0%, transparent 70%);
+}
+@utility aura-bloom-violet-light {
+  background: radial-gradient(ellipse 50% 50% at 70% 50%, rgba(167, 139, 250, 0.03) 0%, transparent 70%);
+}
+@utility aura-bloom-magenta-light {
+  background: radial-gradient(ellipse 50% 40% at 50% 60%, rgba(244, 114, 182, 0.03) 0%, transparent 70%);
+}
+
+/* Dot-mesh pattern — subtle 2px dot grid at 16px spacing. Adds an
+   IDE/technical texture without distracting from card content.
+   Used behind glass cards on the Dashboard hero or AI surfaces.
+
+   Two variants:
+   · aura-dot-grid — cyan dots on dark backgrounds (default)
+   · aura-dot-grid-light — black dots on light backgrounds */
+@utility aura-dot-grid {
+  background-image: radial-gradient(circle, rgba(34, 211, 238, 0.06) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+@utility aura-dot-grid-light {
+  background-image: radial-gradient(circle, rgba(0, 0, 0, 0.10) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+/* Wireframe grid — subtle tech-grid background inspired by orbeatrecords.com.
+   Two overlapping linear-gradients (horizontal + vertical) at 72px spacing
+   with a radial-gradient mask that fades toward the edges so the grid reads
+   as atmosphere, not a pattern. Positioned absolutely behind content.
+
+   Two variants:
+   · aura-wireframe-grid — cyan lines on dark backgrounds (default)
+   · aura-wireframe-grid-light — black lines on light backgrounds */
+@utility aura-wireframe-grid {
+  background-image:
+    linear-gradient(rgba(34, 211, 238, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 211, 238, 0.04) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 70%);
+}
+@utility aura-wireframe-grid-light {
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.10) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.10) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 70%);
+}
+
+/* Glassy card — gradient + 1px cyan border at low alpha. Deepgram
+   glassmorphism-lite: translucent bg with subtle gradient direction.
+   backdrop-filter enabled when parent has visual content behind it
+   (e.g. gradient orbs). Falls back to opaque gradient when parent
+   is solid.
+
+   Two variants:
+   · aura-glass — dark glass (default)
+   · aura-glass-light — light glass for white/light backgrounds */
+@utility aura-glass {
+  background: linear-gradient(135deg, rgba(12, 12, 15, 0.85), rgba(18, 18, 28, 0.7));
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(34, 211, 238, 0.08);
+}
+@utility aura-glass-light {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+}
+@utility aura-glass-violet {
+  background: linear-gradient(135deg, rgba(12, 12, 15, 0.8), rgba(30, 20, 50, 0.6));
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(167, 139, 250, 0.08);
+}
+/* Neon glass — stronger variant for AI surfaces. Cyan border at
+   higher alpha + softer violet inner gradient for that "intelligence
+   in motion" depth. */
+@utility aura-glass-neon {
+  background: linear-gradient(135deg, rgba(12, 14, 22, 0.85), rgba(18, 16, 32, 0.7));
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(34, 211, 238, 0.12);
+  box-shadow: 0 0 40px rgba(34, 211, 238, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.02);
+}
+
+/* Neon border */
+@utility aura-border-cyan {
+  border-color: rgba(34, 211, 238, 0.2);
+}
+@utility aura-border-violet {
+  border-color: rgba(167, 139, 250, 0.2);
+}
+/* Live-AI-state border colours — used by the Header rail toggle so its
+   background ring tracks the AI activity tint (green when idle, amber
+   while thinking, fuchsia on a fresh result). RGB values match the
+   AuraAMark [data-variant="..."] hooks exactly (emerald 500, amber 500,
+   fuchsia 500) so the button border and the icon glyph stay colour-
+   synced at every transition. */
+@utility aura-border-emerald {
+  border-color: rgba(16, 185, 129, 0.2);
+}
+@utility aura-border-amber {
+  border-color: rgba(245, 158, 11, 0.2);
+}
+@utility aura-border-fuchsia {
+  border-color: rgba(217, 70, 239, 0.2);
+}
+
+/* Gradient buttons — defined in @layer components (NOT @utility) so the
+   :hover state survives Tailwind v4's strict-name parsing on every patch
+   version. Earlier attempt used @utility with & :hover nested, which
+   some @tailwindcss/vite builds parsed as a new @utility "name:hover". */
+@layer components {
+  .aura-btn-cyan {
+    background: linear-gradient(135deg, #0891b2, #06b6d4);
+    color: #000;
+    font-weight: 600;
+    transition: all 0.2s ease;
+  }
+  .aura-btn-cyan:hover {
+    background: linear-gradient(135deg, #06b6d4, #22d3ee);
+    box-shadow: 0 0 24px rgba(34, 211, 238, 0.25);
+  }
+  .aura-btn-violet {
+    background: linear-gradient(135deg, #7c3aed, #8b5cf6);
+    color: #fff;
+    font-weight: 600;
+    transition: all 0.2s ease;
+  }
+  .aura-btn-violet:hover {
+    background: linear-gradient(135deg, #8b5cf6, #a78bfa);
+    box-shadow: 0 0 24px rgba(167, 139, 250, 0.25);
+  }
+}
+
+/* Panel base */
+@utility aura-panel {
+  background-color: #0c0c0f;
+  border: 1px solid #1c1c24;
+  border-radius: 12px;
+}
+
+/* Mobile touch improvements */
+html {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+.detail-panel {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+@media (max-width: 480px) {
+  input, textarea, select {
+    font-size: 16px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .touch-target {
+    min-height: 44px;
+  }
+  /* Mobile touch-target rule (Apple HIG / Material spec = 44 px minimum
+     hit area for buttons and links). Applied globally below sm so every
+     touch surface on the most-used viewport is reachable without
+     mis-taps. Desktop leaves buttons at native intrinsic size since
+     mouse pointers don't need 44 px.
+     MOBILE_FIRST Phase 1 — `min-width: 44px` was added to the rule so
+     icon-only buttons (chrome-control ↔ ✦ swap, bell, ☰) stay square
+     instead of wrapping to intrinsic width and stealing re-bar space
+     on the 320 px viewport. Existing explicit `h-11 w-11` arrays on
+     those exact controls already satisfy this; the rule broadens it
+     to every future `<button>` / `<a>` so devs don't have to remember.
+     Selector unchanged — the `aria-hidden` decorative-SVG exemption
+     mooted in the plan-doc turned out unnecessary (inline `<svg>` has
+     `display: inline` by default and `min-width` doesn't propagate to
+     inline content; only buttons/links with explicit classes pick up
+     the rule, which is exactly the intent). */
+  button,
+  a[href],
+  [role="button"]:not(.no-touch-target) {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* ---------- Mobile first-class polish ---------- */
+
+/* Safe-area insets for notched phones. Header / footer reserve room for
+   the iPhone notch + home indicator; main content reserves symmetric
+   horizontal padding. Requires viewport-fit=cover in index.html,
+   which is set above.                                                          */
+.app-header {
+  padding-left: max(env(safe-area-inset-left), 0px);
+  padding-right: max(env(safe-area-inset-right), 0px);
+}
+.app-main {
+  padding-left: max(env(safe-area-inset-left), 0px);
+  padding-right: max(env(safe-area-inset-right), 0px);
+}
+
+/* ---------- Mobile first-class polish ---------- */
+
+/* Scrollbar gutter is reserved globally so slide-in detail panels
+   push content without forcing a layout shift when they appear.       */
+html {
+  scrollbar-gutter: stable;
+}
+
+/* Long tokens (catalog numbers, BPM strings, file paths) cannot fit a
+   320px viewport if they exceed the available width. Allow the
+   browser to break inside them instead of horizontal-scrolling or
+   truncation. Note: not aggressive enough to affect natural prose.    */
+body {
+  overflow-wrap: anywhere;
+}
+
+/* ---------- Impeccable: Card & button micro-interactions ---------- */
+
+/* Button press — scale dip on active for tactile feedback. */
+button:not(.no-press):active {
+  transform: scale(0.97);
+}
+
+/* Entry animations — used via Intersection Observer or mount CSS. */
+@keyframes aura-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes aura-fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes aura-scale-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.aura-enter-fade {
+  animation: aura-fade-in 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.aura-enter-fade-up {
+  animation: aura-fade-up 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.aura-enter-scale {
+  animation: aura-scale-in 0.25s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Staggered delay helpers — use .aura-stagger-1 through -6 to delay
+   entry animation start by 80 ms increments. */
+.aura-stagger-1 { animation-delay: 80ms; }
+.aura-stagger-2 { animation-delay: 160ms; }
+.aura-stagger-3 { animation-delay: 240ms; }
+.aura-stagger-4 { animation-delay: 320ms; }
+.aura-stagger-5 { animation-delay: 400ms; }
+.aura-stagger-6 { animation-delay: 480ms; }
+
+/* Skeleton pulse — subtle shimmer for loading states */
+@keyframes aura-shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.aura-skeleton-shimmer {
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.08) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: aura-shimmer 1.5s ease-in-out infinite;
+}
+
+/* Empty-state icon pulse — gentle attract to drive discovery */
+@keyframes aura-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
+
+.aura-float {
+  animation: aura-float 3s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+/* ---------- Accessibility ---------- */
+
+/* Global keyboard focus ring — uniform across the app, replaces per-component
+   focus utilities stacked on every interactive surface.
+   border-radius:inherit lets per-element rounded utilities (rounded-lg, etc.)
+   propagate to the outline shape without an offset mismatch. */
+*:focus-visible {
+  outline: 2px solid var(--color-aura-cyan);
+  outline-offset: 2px;
+  border-radius: inherit;
+}
+
+/* Allow the existing per-component focus:ring (box-shadow) to coexist with
+   the global outline; buttons typically have decorative boxes that should
+   suppress the default rounded corner. */
+button:focus-visible,
+a:focus-visible,
+[role="button"]:focus-visible {
+  border-radius: 6px;
+}
+
+/* Respect the user's motion preference globally.
+   Kills all animations + transitions AND removes the full-page
+   noise-grain texture (SVG feTurbulence can affect users with
+   vestibular sensitivity even in its static form).
+
+   animation-delay is also overridden so the stagger delay helpers
+   (.aura-stagger-1 through -6, which use 80-480 ms animation-delay)
+   are neutralised — without this the stagger delays persist and items
+   would still appear one-by-one (instantly, but sequentially) for
+   reduced-motion users. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  body {
+    background-image: none !important;
+  }
+}
+
+/* ---------- AppLayout hero opacity (AURA brand image as scenery) ---------- */
+
+/* Default state: the hero image at rest opacity. AppLayout wires the
+   AuraBrand (2.2 MB) at this opacity so it reads as ambient scenery
+   behind the main column. The base rule below is the single source
+   of truth for that resting tint. */
+.aura-hero-bg .aura-hero-mark {
+  opacity: var(--aura-hero-target-opacity, 0.15);
+}
+/* Pending hides the hero while AuraIntro's z-60 overlay renders above
+   it. The handoff is round-and-coherent because both the splash
+   wrapper and the settled branch end at the SAME resting opacity
+   via the var above. */
+.aura-hero-bg--pending .aura-hero-mark {
+  opacity: 0 !important;
+}
+
+/* Staggered card entry — applied to card grids so each card fades
+   in one after another. Parent gets .aura-stagger-group and children
+   get .aura-stagger-item with --i set via style="--i: N" inline prop.
+   Works with the aura-enter-fade-up keyframe above. */
+.aura-stagger-item {
+  animation: aura-fade-up 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--stagger-i, 0) * 80ms);
+}
+
+/* ---------- AURA 'A' contextual mark (AuraAMark component) ----------
+   A single Ethnocentric "A" character at ~85 % of the box, centred via
+   inline-flex. `currentColor` drives the palette — "brand" (cyan, the
+   default) and three pre-wired variant hooks for the AI-state tints:
+
+     · "brand"    → cyan
+     · "idle"     → emerald
+     · "thinking" → amber
+     · "result"   → fuchsia
+
+   The variant wiring already plumbed through AppLayout / Sidebar /
+   AIAssistantPage keeps working unchanged: the wrapper colour swaps
+   from cyan to emerald/amber/fuchsia as the rail's AI activity changes,
+   but the glyph itself stays a single static letter.
+
+   AuraAMark is NOT the brand mark after the retitling — AuraLogo /
+   AuraBrand carry brand identity (the user-supplied PNGs at every
+   chrome size and the in-app composite hero respectively). AuraAMark
+   is a contextual sub-icon: at 14–16 px chrome sizes the bare letter
+   signals "this is the AI area" without competing visually with the
+   larger brand image. PNG lookup at 14 px would pixel-blur into an
+   unreadable blob, so the text glyph stays. */
+
+.aura-a-mono {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Ethnocentric", sans-serif;
+  font-weight: 300;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  vertical-align: middle;
+  color: var(--color-aura-cyan);
+  text-shadow:
+    0 0 6px currentColor,
+    0 0 14px currentColor;
+}
+
+/* Per-variant colour hooks — driven by `data-variant` so callers can
+   thread AI activity state through without prop drilling. */
+.aura-a-mono[data-variant="brand"]    { color: var(--color-aura-cyan); }
+.aura-a-mono[data-variant="idle"]     { color: #10b981; }
+.aura-a-mono[data-variant="thinking"] { color: #f59e0b; }
+.aura-a-mono[data-variant="result"]   { color: #d946ef; }
+
+/* Non-brand tints are darker hues — the cyan-tuned dual halo (6 px +
+   14 px) would wash into a coloured blob. Drop the outer 14 px halo so
+   the inner 6 px keeps the letter readable without oversaturating
+   the perimeter of the glyph. */
+.aura-a-mono:not([data-variant="brand"]) {
+  text-shadow: 0 0 6px currentColor;
+}
+
+/* ---------- Mobile drawer slide animation (AppLayout swap handler) ----------
+   When the user taps ⇄ swap while the drawer is open, the drawer's
+   `isSwapped` prop flips and MobileDrawer remounts the inner
+   container via `key={isSwapped ? "right" : "left"}`. The new mount
+   then triggers one of the keyframes below based on which edge the
+   drawer is now anchored to, animating a slide-in from that edge.
+   Equivalently, the same animation plays on the FIRST open as well
+   (mount of the drawer when sidebarOpen flips false → true), so the
+   open-up animation is consistent with the swap-then-still-open
+   case.
+
+   `animation-fill-mode: both` keeps the end-state
+   (`transform: translateX(0)`) after the keyframe ends so the
+   drawer sits at its rest position until the user closes it.
+
+   Slide-out (close via backdrop / X / Escape) is intentionally NOT
+   animated: the closing path unmounts the entire dialog via
+   `MobileDrawer`'s `if (!open) return null`, which would re-key the
+   outer dialog if we tried to animate. The user's spec mentioned the
+   swap case only, so we leave close as an instant snap.
+
+   prefers-reduced-motion is covered by the existing global rule at
+   the top of the file (`animation-duration: 0.01ms !important`), so
+   reduced-motion users get an instant slide.
+
+   Trade-off: the remount resets any scroll position the user had
+   inside the Sidebar's nav area. Accepted because swap is a global
+   geometry change and the user's visual focus is in transition
+   anyway. If this becomes a quality regression, refactor to a
+   CSS `transition` on `transform` (loses the strict-CSS-keyframe
+   spec but keeps the Sidebar instance stable). */
+@keyframes aura-mobile-drawer-slide-in-from-left {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(0); }
+}
+@keyframes aura-mobile-drawer-slide-in-from-right {
+  from { transform: translateX(100%); }
+  to   { transform: translateX(0); }
+}
+
+.aura-mobile-drawer--left  { animation: aura-mobile-drawer-slide-in-from-left  180ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+.aura-mobile-drawer--right { animation: aura-mobile-drawer-slide-in-from-right 180ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+/* ---------- Dark theme overrides (driven by data-theme="dark" on <html>) ---------- */
+/* When the ThemeProvider sets data-theme="dark" on <html>, these overrides
+   swap all light-themed Tailwind utility classes back to their dark equivalents.
+   The components keep their current light-themed classNames; CSS attribute
+   selectors do the runtime swap so no component refactoring is needed.
+   Transition on html * is a global crossfade so the swap reads smoothly. */
+
+html[data-theme="dark"] {
+  /* ── Backgrounds ── */
+  --aura-hero-target-opacity: 0.2;
+}
+
+html[data-theme="dark"] body {
+  background-color: #000;
+  background-image:
+    radial-gradient(circle, rgba(34, 211, 238, 0.04) 1px, transparent 1px),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.7%25'/%3E%3C/svg%3E");
+  background-size: 16px 16px, auto;
+}
+
+html[data-theme="dark"] .bg-white {
+  background-color: #000;
+}
+
+html[data-theme="dark"] .bg-\[\#e4dfd8\] {
+  background-color: #000;
+}
+
+html[data-theme="dark"] .bg-zinc-50 {
+  background-color: #18181b;
+}
+
+html[data-theme="dark"] .bg-zinc-100 {
+  background-color: #27272a;
+}
+
+html[data-theme="dark"] .bg-\[\#0c0c0f\] {
+  background-color: #0c0c0f;
+}
+
+/* ── Text colors ── */
+html[data-theme="dark"] .text-white {
+  color: #fff;
+}
+
+html[data-theme="dark"] .text-zinc-900 {
+  color: #f4f4f5;
+}
+
+html[data-theme="dark"] .text-zinc-700 {
+  color: #d4d4d8;
+}
+
+html[data-theme="dark"] .text-zinc-600 {
+  color: #a1a1aa;
+}
+
+html[data-theme="dark"] .text-zinc-500 {
+  color: #71717a;
+}
+
+html[data-theme="dark"] .text-zinc-400 {
+  color: #52525b;
+}
+
+html[data-theme="dark"] .text-zinc-300 {
+  color: #3f3f46;
+}
+
+/* ── Border colors ── */
+html[data-theme="dark"] .border-zinc-200 {
+  border-color: #27272a;
+}
+
+html[data-theme="dark"] .border-zinc-300 {
+  border-color: #3f3f46;
+}
+
+html[data-theme="dark"] .border-black\/20 {
+  border-color: #27272a;
+}
+
+/* ── Hover states ── */
+html[data-theme="dark"] .hover\:bg-zinc-100:hover {
+  background-color: #27272a;
+}
+
+html[data-theme="dark"] .hover\:bg-zinc-50:hover {
+  background-color: #18181b;
+}
+
+html[data-theme="dark"] .hover\:text-zinc-900:hover {
+  color: #f4f4f5;
+}
+
+html[data-theme="dark"] .hover\:text-zinc-700:hover {
+  color: #d4d4d8;
+}
+
+html[data-theme="dark"] .hover\:border-zinc-300:hover {
+  border-color: #3f3f46;
+}
+
+/* ── Shadows ── */
+html[data-theme="dark"] .shadow-zinc-900\/10 {
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+}
+
+html[data-theme="dark"] .shadow-zinc-900\/5 {
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* ── Aura utility overrides ── */
+html[data-theme="dark"] .aura-wireframe-grid-light {
+  background-image:
+    linear-gradient(rgba(34, 211, 238, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 211, 238, 0.04) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 70%);
+}
+
+html[data-theme="dark"] .aura-bloom-cyan-light {
+  background: radial-gradient(ellipse 60% 60% at 30% 50%, rgba(34, 211, 238, 0.06) 0%, transparent 70%);
+}
+
+html[data-theme="dark"] .aura-bloom-violet-light {
+  background: radial-gradient(ellipse 50% 50% at 70% 50%, rgba(167, 139, 250, 0.05) 0%, transparent 70%);
+}
+
+html[data-theme="dark"] .aura-bloom-magenta-light {
+  background: radial-gradient(ellipse 50% 40% at 50% 60%, rgba(244, 114, 182, 0.04) 0%, transparent 70%);
+}
+
+/* Dot grid dark override */
+html[data-theme="dark"] .aura-dot-grid-light {
+  background-image: radial-gradient(circle, rgba(34, 211, 238, 0.04) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+/* Dark-mode shadow override for card lift */
+html[data-theme="dark"] .aura-card-lift:hover {
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4) !important;
+}
+
+html[data-theme="dark"] .aura-glass-light {
+  background: linear-gradient(135deg, rgba(12, 12, 15, 0.85), rgba(18, 18, 28, 0.7));
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(34, 211, 238, 0.08);
+  box-shadow: none;
+}
+
+/* ── Accent colors for dark mode ── */
+html[data-theme="dark"] .text-cyan-600 {
+  color: #22d3ee;
+}
+
+html[data-theme="dark"] .bg-cyan-500\/10 .text-cyan-600 {
+  color: #22d3ee;
+}
+
+/* UpdateBanner + ErrorBoundary chunk-load path use cyan-700 for text
+   and cyan-800 for hover. On the dark #000 background these default
+   Tailwind values (#0e7490 / #155e75) are too dim — remap to bright
+   cyan variants so the update banner and reload buttons stay legible. */
+html[data-theme="dark"] .text-cyan-700 {
+  color: #22d3ee;
+}
+
+html[data-theme="dark"] .hover\:text-cyan-800:hover {
+  color: #67e8f9;
+}
+
+html[data-theme="dark"] .text-cyan-700\/90 {
+  color: rgba(34, 211, 238, 0.9);
+}
+
+/* ── Misc overrides ── */
+html[data-theme="dark"] .text-red-600 {
+  color: #fca5a5;
+}
+
+html[data-theme="dark"] .hover\:text-red-600:hover {
+  color: #fca5a5;
+}
+
+html[data-theme="dark"] .text-red-700 {
+  color: #fca5a5;
+}
+
+html[data-theme="dark"] .hover\:text-red-700:hover {
+  color: #fecaca;
+}
+
+html[data-theme="dark"] .text-amber-700 {
+  color: #fcd34d;
+}
+
+html[data-theme="dark"] .text-red-500\/70 {
+  color: rgba(248, 113, 113, 0.8);
+}
+
+/* ── Scrollbar for dark mode ── */
+html[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background-color: #27272a;
+}
+
+html[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background-color: #3f3f46;
+}
+
+/* AuraIntro overlay — bg-white/70 on light, bg-black/70 on dark */
+html[data-theme="dark"] .aura-intro {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* ---------- Toast undo countdown bar (Toast.tsx) ---------- */
+/* Drives the thin cyan bar along the bottom of every action-bearing
+   toast. Two keyframes — `shrink` shrinks the bar from full width to
+   zero over `duration`, while the toast's setTimeout fires onDone at
+   the same moment so the bar visually drains in lockstep with the
+   toast's life. aria-hidden=true on the bar (Toast.tsx) so screen
+   readers don't perceive a progress indicator they cannot act on.
+
+   The linear easing matches Toast's countdown philosophy: users
+   should know exactly how much beat they have left, not have the
+   end-of-window surprise them. `forwards` keeps the post-state
+   (scaleX 0) so the bar doesn't snap back to full when animation
+   ends. */
+@keyframes aura-toast-shrink {
+  from { transform: scaleX(1); }
+  to   { transform: scaleX(0); }
+}

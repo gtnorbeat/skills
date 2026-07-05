@@ -1,0 +1,26 @@
+# Cloudflare base config — shared across all Workers in the monorepo.
+# Copy relevant sections to each Worker's wrangler.toml.
+
+# Default compatibility date — override per-worker if needed.
+compatibility_date = "2025-06-28"
+
+# Common environment variables (values set via `wrangler secret put`)
+[vars]
+# OPENROUTER_API_KEY = ""  # (removed — LLM calls now routed through dedicated LLM worker)
+DATABASE_URL = ""
+INTERNAL_API_KEY = ""
+
+# R2 bucket — create via `wrangler r2 bucket create r2-aura`
+# [[r2_buckets]]
+# binding = "R2_BUCKET"
+# bucket_name = "r2-aura"
+
+# Queues — create via `wrangler queues create`
+# [[queues.producers]]
+# binding = "AGENT_QUEUE"
+# queue = "aura-nexus-agent-queue"
+#
+# [[queues.consumers]]
+# queue = "aura-nexus-agent-queue"
+# max_batch_size = 1
+# max_batch_timeout = 5

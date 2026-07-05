@@ -1,0 +1,41 @@
+{
+  "name": "AURA — A&R Utility & Resources AI Assistant",
+  "short_name": "AURA",
+  "description": "AURA — A&R Utility & Resources AI Assistant for independent labels. Organise artists, releases, rights, promo workflows, and revenue tracking from one focused dashboard.",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#09090b",
+  "theme_color": "#09090b",
+  "categories": ["business", "productivity"],
+  "icons": [
+    {
+      "src": "/brand-assets/AURA-icon-192.webp",
+      "sizes": "192x192",
+      "type": "image/webp",
+      "purpose": "any"
+    },
+    {
+      "src": "/brand-assets/AURA-icon-512.webp",
+      "sizes": "512x512",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "AI Assistant",
+      "short_name": "AI",
+      "url": "/ai",
+      "description": "Open the AI Assistant rail directly."
+    },
+    {
+      "name": "Dashboard",
+      "short_name": "Home",
+      "url": "/",
+      "description": "Open the dashboard cold view."
+    }
+  ]
+}

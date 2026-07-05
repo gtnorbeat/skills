@@ -1,0 +1,34 @@
+# AURA — Cloudflare Worker
+# API backend for auralabels.app
+name = "aura"
+main = "src/index.ts"
+compatibility_date = "2025-06-28"
+compatibility_flags = ["nodejs_compat"]
+
+# R2 bucket for label assets (artwork, contracts, demo files, release assets)
+[[r2_buckets]]
+binding = "R2_BUCKET"
+bucket_name = "r2-aura"
+
+# Scheduled cleanup — deletes files older than 90 days (daily at 03:00 UTC)
+[triggers]
+crons = ["0 3 * * *"]
+
+# Workers AI binding — in-house content generation (free tier)
+[ai]
+binding = "AI"
+
+# Email Service binding — send outgoing emails
+[[send_email]]
+name = "SEND_EMAIL"
+
+# Observable
+[observability]
+enabled = true
+head_sampling_rate = 1
+
+# Environment variables — set secrets via `wrangler secret put`
+# Required: JWT_SECRET, DATABASE_URL
+# Optional: WEBHOOK_SECRET
+
+[vars]

@@ -1,0 +1,17 @@
+name: Reset test database
+
+on:
+  schedule:
+    # Every Sunday at 03:00 UTC — resets the ci-test branch to match main.
+    - cron: "0 3 * * 0"
+  workflow_dispatch:
+
+jobs:
+  reset-db:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Reset Neon ci-test branch to parent
+        run: npx neonctl@latest branches reset ci-test --project-id little-moon-88629584 --parent
+        env:
+          NEON_API_KEY: ${{ secrets.NEON_API_KEY }}

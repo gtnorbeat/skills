@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Favicon — single source-of-truth raster. PWA-pack AURA.png drives
+         every icon-related entry in this file (favicon, apple-touch-icon,
+         og:image, twitter:image, JSON-LD logo.contentUrl). One 666 KB
+         source = one consistent brand surface across all visitor contexts.
+         The folder `/brand-assets/` is space-free; the ChatGPT in-app
+         brand source has spaces + a comma + an underscore-time stamp and
+         appears URL-encoded accordingly. -->
+    <link rel="icon" type="image/webp" href="/brand-assets/AURA-icon-192.webp" sizes="192x192" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <!-- theme-color: paint the Safari iOS Chrome bar and Android address-bar
+         in AURA's actual background so the immersive dark surface continues
+         across the browser chrome. --color-aura-surface lives in index.css. -->
+    <meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)" />
+    <meta name="color-scheme" content="dark" />
+    <!-- format-detection: stop iOS Safari from auto-linking raw numerals
+         (timestamps, BPM, cats, etc.) to tel: — the demo inbox / release
+         pages render those as plain text and would otherwise gain spurious
+         phone links. -->
+    <meta name="format-detection" content="telephone=no" />
+    <!-- MOBILE_FIRST Phase 6 — PWA installability meta cluster.
+         Located just after the platform-color meta block so all
+         platform-level chrome lives together. -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <!-- Apple Touch Icon — single 666 KB raster. iOS Safari picks the
+         closest match against device DPR; the OS down-samples cleanly for
+         older devices. Same path as the favicon so a single source PNG
+         drives every entry. -->
+    <link rel="apple-touch-icon" href="/brand-assets/AURA-icon-192.webp" />
+    <!-- apple-mobile-web-app-capable: enables Add-to-Home-Screen PWA
+         mode in iOS Safari (full-screen, no Safari chrome once launched
+         from the Home Screen). -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <!-- status-bar-style: `black` keeps the status bar opaque black
+         across Home Screen launches so the dark canvas continues. We
+         deliberately skip `black-translucent` because it would push
+         the page content under the status bar — the existing layout
+         doesn't tune the top safe-area inset for content-under-bar. -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <!-- title: the text iOS shows beneath the icon on the Home
+         Screen. `short_name` from manifest.webmanifest carries this on
+         Android; the iOS meta overrides it for share-extension fluidity. -->
+    <meta name="apple-mobile-web-app-title" content="AURA" />
+    <!-- Preload the two fonts that gate first-paint text so the browser
+         fires both fetches before CSS finishes parsing. crossorigin is
+         required for font fetches even on same-origin assets.         -->
+    <link
+      rel="preload"
+      href="/fonts/Geist-Variable.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/Ethnocentric%20Light.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <title>AURA — A&R Utility & Resources AI Assistant</title>
+    <meta name="description" content="AURA — A&R Utility & Resources AI Assistant for independent labels. Organise artists, releases, rights, promo workflows, and revenue tracking from one focused dashboard." />
+    <!-- canonical: the SPA primary URL. Every internal React Router
+         path resolves to the same index.html shell under Vite dev /
+         production, so duplicating content under /login /dashboard
+         /artists etc. would risk Google indexing the same HTML under
+         multiple URLs. The canonical collapses all of those to this
+         one origin. Update the domain if the Pages project is renamed or
+         `auralabels.app` custom-domain migration lands. -->
+    <link rel="canonical" href="https://auralabels-app.pages.dev/" />
+    <!-- Open Graph: rich-link preview when the AURA login URL is
+         shared on Facebook / LinkedIn / Slack / Discord / iMessage.
+         The image is the same single PWA-pack raster that the favicon
+         and apple-touch-icon reference; absolute URL so unfurlers
+         don't have to request-time normalise the relative /loghi aura/
+         path against the SPA's `<base>` (which the document doesn't
+         set). og:locale=en matches the only currently-served
+         language; add alternates for translations when they ship. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="AURA" />
+    <meta property="og:title" content="AURA — A&R Utility & Resources AI Assistant" />
+    <meta property="og:description" content="AURA — A&R Utility & Resources AI Assistant for independent labels. Organise artists, releases, rights, promo workflows, and revenue tracking from one focused dashboard." />
+    <meta property="og:url" content="https://auralabels-app.pages.dev/" />
+    <meta property="og:image" content="https://auralabels-app.pages.dev/brand-assets/AURA-icon-512.webp" />
+    <meta property="og:image:alt" content="AURA — A&R Utility & Resources AI Assistant brand mark" />
+    <meta property="og:locale" content="en" />
+    <!-- Twitter Card: X / Twitter link unfurl. summary_large_image
+         for the full brand-mark preview; twitter:image:alt mirrors
+         og:image:alt for AT and screen-reader consumers on the
+         unfurl preview. -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="AURA — A&R Utility & Resources AI Assistant" />
+    <meta name="twitter:description" content="AURA — A&R Utility & Resources AI Assistant for independent labels. Organise artists, releases, rights, promo workflows, and revenue tracking from one focused dashboard." />
+    <meta name="twitter:image" content="https://auralabels-app.pages.dev/brand-assets/AURA-icon-512.webp" />
+    <meta name="twitter:image:alt" content="AURA — A&R Utility & Resources AI Assistant brand mark" />
+    <!-- Structured data — single @graph with two @type entries so
+         Google Knowledge Graph and AI Overviews can pick up the
+         brand identity (Organization) and the product surface
+         (SoftwareApplication) without two competing JSON-LD blocks.
+         applicationCategory=BusinessApplication places AURA next to
+         other indie-label workflow tools in topical clusters. The
+         `category: "Label Management Software"` free-text sibling
+         carries the niche descriptor (schema.org has no
+         `applicationSubCategory`, so we use the inherited `category`).
+         The `offers` block reads as "free to log in today, accepting
+         traffic" via price=0 + availability=InStock (the schema.org
+         ItemAvailability that conveys a deploy that's up and
+         reachable). Swap to LimitedAvailability if AURA ever exits
+         to invite-only closed beta; replace price/priceCurrency with
+         the real paid-plan price spec when monetisation lands. Both
+         @id anchors are stable per schema.org canonical-id guidance,
+         so a future Knowledge-Graph entry can reuse them.
+         robots.txt disallows all paths so a sitemap would be
+         misleading; the JSON-LD + canonical are the right SEO
+         artefacts for an auth-gated SPA. -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://auralabels-app.pages.dev/#organization",
+          "name": "AURA",
+          "alternateName": "A&R Utility and Resources AI Assistant",
+          "url": "https://auralabels-app.pages.dev/",
+          "logo": {
+            "@type": "ImageObject",
+            "contentUrl": "https://auralabels-app.pages.dev/brand-assets/AURA-icon-512.webp"
+          },
+          "description": "AURA — A&R Utility & Resources AI Assistant for independent record labels. Organise artists, releases, rights, promo workflows, and revenue tracking from one focused dashboard."
+        },
+        {
+          "@type": "SoftwareApplication",
+          "@id": "https://auralabels-app.pages.dev/#software",
+          "name": "AURA",
+          "applicationCategory": "BusinessApplication",
+          "category": "Label Management Software",
+          "operatingSystem": "Web (modern browsers — Chrome, Firefox, Safari, Edge)",
+          "url": "https://auralabels-app.pages.dev/",
+          "description": "AURA — A&R Utility & Resources AI Assistant for independent labels. Organise artists, releases, rights, promo workflows, and revenue tracking from one focused dashboard.",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock"
+          }
+        }
+      ]
+    }
+    </script>
+    <!-- Theme initializer — reads localStorage synchronously before React
+         mounts so every paint (including the auth-checking spinner) respects
+         the user's saved theme preference. No FOUC. Falls back to light. -->
+    <script>
+      (function() {
+        var theme;
+        try { theme = localStorage.getItem('aura_theme'); } catch(e) {}
+        if (theme === 'dark') {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        } else if (theme === 'light' || !theme) {
+          document.documentElement.setAttribute('data-theme', 'light');
+        } else {
+          // system — defer to prefers-color-scheme
+          document.documentElement.setAttribute('data-theme',
+            window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+          );
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <!-- SPA mount — React hydrates into #root and replaces the
+         static H1 with the interactive LoginPage. The H1 below is
+         server-side rendered so search-engine crawlers and
+         social-media unfurlers see a top-level heading before any
+         JavaScript runs. It uses the same sr-only clip pattern as
+         the React sidecar heading so there's no visual flash on
+         load; the React tree lands with its own visible heading
+         and this one remains as a hidden SEO/AT anchor. -->
+    <h1 style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">
+      AURA — A&R Utility &amp; Resources AI Assistant
+    </h1>
+    <!-- Noscript fallback: AURA is a single-page React app and ships
+         nothing statically rendered. Show a centred guidance message
+         instead of an empty <div id="root"></div> when JS is disabled. -->
+    <noscript>
+      <div style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:2rem;background:#000;color:#e4e4e7;font-family:Geist,system-ui,sans-serif;text-align:center;line-height:1.5">
+        <div>
+          <p style="font-size:1rem;font-weight:600;margin:0 0 .5rem">AURA requires JavaScript</p>
+          <p style="font-size:.875rem;color:#a1a1aa;margin:0">Enable JavaScript and reload to open your label-management dashboard.</p>
+        </div>
+      </div>
+    </noscript>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

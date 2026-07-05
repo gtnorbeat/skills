@@ -1,0 +1,50 @@
+User-agent: *
+Allow: /$
+Disallow: /api/
+Disallow: /login
+Disallow: /artists
+Disallow: /releases
+Disallow: /contracts
+Disallow: /revenue
+Disallow: /demo-inbox
+Disallow: /promo
+Disallow: /calendar
+Disallow: /ai
+Disallow: /campaigns
+Disallow: /content
+Disallow: /settings
+
+# Policy: the public marketing surface shipped by the anonymous flow
+# is crawllable — `LandingPage` mounts at `/` for unauthenticated
+# visitors and is the brand-identity entry point for the Knowledge
+# Graph + AI Overview picks. Every auth-gated SPA route (Dashboard +
+# lazy-split children with their optional `:id` sub-paths) is
+# explicitly Disallow-ed so organic blue-link SERPs never land users
+# on a login wall. `/api/*` is the JSON surface and is also never
+# indexed — internal routes would leak schema, demo payloads, and
+# user-supplied content into search results if they were crawlable.
+# `/login` is the auth-entry screen (technically public-reachable,
+# but not a marketing surface), and is therefore Disallow-ed too.
+#
+# Note: because the SPA serves the same `/index.html` shell for every
+# route, the canonical-link collapse (see `index.html`'s
+# `/* canonical */` block) plus `Allow: /$` together mean the only
+# page any compliant crawler can de-duplicate to the canonical URL is
+# the unauthenticated LandingPage render of `/` itself. Every other
+# URL resolves to the same shell and is collapsed away by the
+# canonical — so the Disallow list is belt-and-suspenders, not the
+# primary SEO safeguard.
+#
+# The JSON-LD `@graph` in `/index.html`
+# (Organization + SoftwareApplication with Offer price=0 / InStock)
+# is the second, crawler-policy-independent SEO surface: AI Overview
+# citations and Knowledge Panel entity picks cite that block
+# regardless of robots.txt. So splitting the crawl surface /
+# structured-data surface the way this file now does is the right
+# shape — crawlers see exactly the brand entry point we want them
+# to index, and the brand identity survives on every other path
+# via the JSON-LD.
+#
+# Cross-link: index.html `/* canonical */` and `/* Structured data */`
+# block comments; App.tsx `Routes` block (the single source of truth
+# for which path maps to which gated surface).

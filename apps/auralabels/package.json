@@ -1,0 +1,53 @@
+{
+  "name": "@aura-labels/auralabels",
+  "version": "1.0.0",
+  "description": "AURA Label Manager — AI-supported label management assistant",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"npm run dev:app\" \"npm run dev:worker\"",
+    "dev:app": "vite",
+    "dev:worker": "wrangler dev --local",
+    "build:client": "vite build",
+    "preview": "vite preview",
+    "deploy": "wrangler deploy",
+    "deploy:pages": "npm run build:client && wrangler pages deploy dist/ --project-name auralabels-app",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "seed": "node scripts/seed-local.mjs"
+  },
+  "dependencies": {
+    "@aura-labels/db": "*",
+    "@neondatabase/serverless": "^0.10.0",
+    "@playwright/test": "^1.61.1",
+    "bcryptjs": "^3.0.3",
+    "drizzle-orm": "^0.45.2",
+    "jose": "^5.0.0",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "react-router-dom": "^7.18.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250601.0",
+    "@tailwindcss/vite": "^4.1.4",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/node": "^22.15.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "@vitest/coverage-v8": "^4.1.9",
+    "autoprefixer": "^10.4.21",
+    "concurrently": "^9.1.0",
+    "jsdom": "^29.1.1",
+    "msw": "^2.14.6",
+    "tailwindcss": "^4.1.4",
+    "typescript": "~5.8.3",
+    "vite": "^6.3.5",
+    "vitest": "^4.1.9",
+    "wrangler": "^4.106.0"
+  }
+}

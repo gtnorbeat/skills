@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AURA — User Guide</title>
+<style>
+  body {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 24px;
+    background: #0a0a0f;
+    color: #e4e4e7;
+    font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    line-height: 1.6;
+  }
+  h1 { color: #22d3ee; font-size: 2rem; border-bottom: 1px solid #1c1c24; padding-bottom: 12px; }
+  h2 { color: #a78bfa; font-size: 1.4rem; margin-top: 40px; }
+  h3 { color: #e4e4e7; font-size: 1.1rem; margin-top: 28px; }
+  a { color: #22d3ee; }
+  code { background: #1c1c24; padding: 2px 6px; border-radius: 4px; font-size: 0.9em; color: #fbbf24; }
+  pre { background: #0c0c0f; border: 1px solid #1c1c24; border-radius: 8px; padding: 16px; overflow-x: auto; }
+  pre code { background: none; padding: 0; color: #a78bfa; }
+  table { border-collapse: collapse; width: 100%; margin: 16px 0; }
+  th, td { border: 1px solid #1c1c24; padding: 8px 12px; text-align: left; font-size: 0.9em; }
+  th { background: #0c0c0f; color: #22d3ee; font-weight: 600; }
+  tr:hover { background: rgba(34, 211, 238, 0.03); }
+  blockquote { border-left: 3px solid #22d3ee; padding-left: 16px; color: #a1a1aa; margin: 16px 0; }
+  hr { border: none; border-top: 1px solid #1c1c24; margin: 32px 0; }
+  strong { color: #fff; }
+  img { max-width: 100%; }
+</style>
+</head>
+<body>
+<h1 id="aura--user-guide">AURA — User Guide</h1>
+<blockquote>
+<p><strong>A&amp;R Utility &amp; Revenue Assistant</strong></p>
+<p>How to run your label from one dashboard.</p>
+</blockquote>
+<hr>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol>
+<li><a href="#1-getting-started">Getting Started</a></li>
+<li><a href="#2-how-aura-is-built">How AURA Is Built</a></li>
+<li><a href="#3-the-dashboard">The Dashboard</a></li>
+<li><a href="#4-managing-your-artist-roster">Managing Your Artist Roster</a></li>
+<li><a href="#5-release-pipeline">Release Pipeline</a></li>
+<li><a href="#6-rights--contracts">Rights &amp; Contracts</a></li>
+<li><a href="#7-demo-inbox">Demo Inbox</a></li>
+<li><a href="#8-promo-campaigns">Promo Campaigns</a></li>
+<li><a href="#9-calendar--tasks">Calendar &amp; Tasks</a></li>
+<li><a href="#10-revenue-tracking">Revenue Tracking</a></li>
+<li><a href="#11-ai-assistant">AI Assistant</a></li>
+<li><a href="#12-content-engine">Content Engine</a></li>
+<li><a href="#13-settings">Settings</a></li>
+<li><a href="#14-security--access">Security &amp; Access</a></li>
+<li><a href="#15-quick-reference">Quick Reference</a></li>
+</ol>
+<hr>
+<h2 id="1-getting-started">1. Getting Started</h2>
+<h3 id="signing-in">Signing In</h3>
+<ol>
+<li>Navigate to <a href="https://auralabels.app">https://auralabels.app</a></li>
+<li>Enter your username and password</li>
+<li>You&#39;ll land on the Dashboard</li>
+</ol>
+<p>Your session lasts <strong>7 days</strong>. After that, you&#39;ll be redirected to sign in again.</p>
+<h3 id="the-interface">The Interface</h3>
+<p>AURA has three main regions:</p>
+<ul>
+<li><strong>Left Sidebar</strong> — Navigation between all surfaces. Active item is highlighted in orange with a small dot indicator.</li>
+<li><strong>Top Header</strong> — Page title, notification bell, AI toggle (on desktop), and your user menu (avatar + username).</li>
+<li><strong>Main Content</strong> — The active surface. Every page has a dark background with zinc-toned cards.</li>
+</ul>
+<p>The aesthetic is intentionally dark and minimal — designed for long studio sessions without eye strain.</p>
+<h3 id="navigation-surfaces">Navigation Surfaces</h3>
+<table>
+<thead>
+<tr>
+<th>Surface</th>
+<th>Route</th>
+<th>What you do there</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Dashboard</td>
+<td><code>/</code></td>
+<td>Today&#39;s priorities at a glance</td>
+</tr>
+<tr>
+<td>AI Assistant</td>
+<td><code>/ai</code></td>
+<td>Generate copy and strategy with AI</td>
+</tr>
+<tr>
+<td>Content Engine</td>
+<td><code>/content</code></td>
+<td>Platform-specific content generation</td>
+</tr>
+<tr>
+<td>Artists</td>
+<td><code>/artists</code></td>
+<td>Manage your roster</td>
+</tr>
+<tr>
+<td>Releases</td>
+<td><code>/releases</code></td>
+<td>Track your release pipeline</td>
+</tr>
+<tr>
+<td>Contracts</td>
+<td><code>/contracts</code></td>
+<td>Manage rights and agreements</td>
+</tr>
+<tr>
+<td>Demo Inbox</td>
+<td><code>/demo-inbox</code></td>
+<td>Review artist submissions</td>
+</tr>
+<tr>
+<td>Promo Campaigns</td>
+<td><code>/promo</code></td>
+<td>Plan and run campaigns</td>
+</tr>
+<tr>
+<td>Calendar</td>
+<td><code>/calendar</code></td>
+<td>Tasks and deadlines</td>
+</tr>
+<tr>
+<td>Revenue</td>
+<td><code>/revenue</code></td>
+<td>Track earnings and payouts</td>
+</tr>
+<tr>
+<td>Settings</td>
+<td><code>/settings</code></td>
+<td>Configure your label</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="2-how-aura-is-built">2. How AURA Is Built</h2>
+<h3 id="system-architecture">System Architecture</h3>
+<p>AURA has two parts that work together:</p>
+<pre><code>┌──────────────────────────────────────────────────────┐
+│                   Your Browser                        │
+│                                                      │
+│   ┌──────────┐  ──── JWT token ────►  ┌──────────┐  │
+│   │ Frontend │                         │   API    │  │
+│   │ (React)  │ ◄──── JSON data ──────  │ (Worker) │  │
+│   └──────────┘                         └────┬─────┘  │
+│                                             │        │
+│                                      ┌──────┴──────┐ │
+│                                      │   Database   │ │
+│                                      │  (Postgres)  │ │
+│                                      └─────────────┘ │
+│                                                      │
+│   What you see           What stores your data       │
+│   (auralabels.app)       (Neon cloud database)       │
+└──────────────────────────────────────────────────────┘
+</code></pre>
+<ul>
+<li><strong>Frontend</strong> — The React app running in your browser. Every page, form, chart, and card you interact with is rendered here.</li>
+<li><strong>API</strong> — The Cloudflare Worker that handles all requests. It checks your login, reads and writes your data, generates AI content, and manages file uploads.</li>
+<li><strong>Database</strong> — Neon Postgres, a cloud database that stores your artists, releases, contracts, demos, tasks, revenue, and settings. All your label data lives here.</li>
+</ul>
+<h3 id="route-map">Route Map</h3>
+<p>Each sidebar surface talks to dedicated API endpoints:</p>
+<pre><code>  Sidebar Surface             API Endpoints Used
+ ──────────────────       ──────────────────────────
+  Dashboard               /api/revenue
+                          /api/demos
+                          /api/campaigns
+                          /api/tasks
+                          /api/notifications
+                          /api/ai-actions
+                          /api/activities
+
+  Artists                 /api/artists
+
+  Releases                /api/releases
+
+  Contracts               /api/contracts
+                          /api/files (uploads)
+
+  Demo Inbox              /api/demos
+                          /api/webhook/:uuid (public intake)
+
+  Promo Campaigns         /api/campaigns
+
+  Calendar                /api/tasks
+
+  Revenue                 /api/revenue
+
+  AI Assistant            /api/ai/generate
+
+  Content Engine          /api/ai/generate
+
+  Settings                /api/admin (team access)
+</code></pre>
+<h3 id="ai-pipeline">AI Pipeline</h3>
+<p>When you generate content with the AI Assistant or Content Engine, AURA chains three AI engines:</p>
+<pre><code>Your Prompt
+    │
+    ▼
+┌──────────────┐
+│ 1. OpenRouter │  ← OpenRouter (primary, shows cyan badge)
+│   Llama 3.3   │
+└──────┬────────┘
+       │ fails or not configured?
+       ▼
+┌──────────────┐
+│ 2. Workers AI│  ← Workers AI (fallback, shows emerald badge)
+└──────┬───────┘
+       │ fails or not configured?
+       ▼
+┌──────────────┐
+│ 3. Template  │  ← Built-in templates (shows zinc badge)
+│   Fallback   │     Always available, no key needed
+└──────┬───────┘
+       │
+       ▼
+   Your Result
+</code></pre>
+<p>This means AURA works even without any AI keys — the template fallback produces platform-aware copy with correct character limits for every channel.</p>
+<h3 id="file-storage">File Storage</h3>
+<p>Files you upload (artwork, contracts, demo audio) are stored in <strong>Cloudflare R2</strong>, a secure cloud storage service. They&#39;re served through the same <code>auralabels.app</code> domain via <code>/api/files/:key</code>.</p>
+<h3 id="security">Security</h3>
+<p>AURA protects your data with five security layers:</p>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>What It Does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>WAF</strong></td>
+<td>Blocks malicious requests before they reach the app</td>
+</tr>
+<tr>
+<td><strong>Zero Trust</strong></td>
+<td>Every request is authenticated at the network edge</td>
+</tr>
+<tr>
+<td><strong>Rate Limiting</strong></td>
+<td>Caps failed login attempts (5 per 15 minutes)</td>
+</tr>
+<tr>
+<td><strong>Timing-Safe Auth</strong></td>
+<td>Prevents attackers from guessing valid usernames</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="3-the-dashboard">3. The Dashboard</h2>
+<p>The Dashboard is your operational cockpit. It shows everything that needs your attention today.</p>
+<h3 id="what-you-see">What You See</h3>
+<ul>
+<li><strong>Today&#39;s Priorities</strong> — Tasks due today, ranked by priority (critical → high → medium → low)</li>
+<li><strong>Revenue Overview</strong> — Total revenue, monthly trend, pending payouts</li>
+<li><strong>Active Campaigns</strong> — Promo campaigns currently running</li>
+<li><strong>Demo Inbox Summary</strong> — How many demos are awaiting review</li>
+<li><strong>Deadlines Needing Attention</strong> — Releases and contracts with approaching dates</li>
+<li><strong>AI Recommendations</strong> — Suggested actions from the AI (copy ideas, strategy prompts)</li>
+<li><strong>Artist Activity Feed</strong> — Recent actions across your roster</li>
+</ul>
+<h3 id="how-to-use-it">How to Use It</h3>
+<p>The Dashboard loads all data in parallel when you sign in. Use it as your morning briefing:</p>
+<ol>
+<li>Check <strong>Today&#39;s Priorities</strong> first — these are things that must be done today</li>
+<li>Scan <strong>Revenue Overview</strong> for any anomalies</li>
+<li>Review <strong>Demo Inbox</strong> — new submissions since yesterday</li>
+<li>Check <strong>Deadlines</strong> for anything due this week</li>
+<li>Open any item by clicking its card — it takes you to the relevant detail view</li>
+</ol>
+<hr>
+<h2 id="4-managing-your-artist-roster">4. Managing Your Artist Roster</h2>
+<h3 id="viewing-your-roster">Viewing Your Roster</h3>
+<p>Navigate to <strong>Artists</strong> (<code>/artists</code>). You&#39;ll see all artists in your label, with:</p>
+<ul>
+<li>Artist name and image</li>
+<li><strong>Status badges</strong> — Active, Inactive, Signed, Prospect</li>
+<li><strong>Profile completeness</strong> — Orange indicators show what&#39;s missing (bio, social links, etc.)</li>
+<li>Genre tags</li>
+<li>Total releases count</li>
+</ul>
+<h3 id="adding-an-artist">Adding an Artist</h3>
+<ol>
+<li>Click <strong>+ Add Artist</strong> (top-right)</li>
+<li>Fill in: Name, Label, Status, Genres, Bio, Image URL</li>
+<li>Add social links (Instagram, Spotify, SoundCloud, etc.)</li>
+<li>Click <strong>Save</strong></li>
+</ol>
+<h3 id="editing-an-artist">Editing an Artist</h3>
+<ol>
+<li>Click an artist from the list to open their detail panel</li>
+<li>Edit any field</li>
+<li>Click <strong>Save</strong></li>
+</ol>
+<h3 id="profile-completeness">Profile Completeness</h3>
+<p>Artists with missing information show orange &quot;missing info&quot; indicators. The system tracks:</p>
+<ul>
+<li>Bio (empty?)</li>
+<li>Social links (missing Instagram? Spotify?)</li>
+<li>Image URL</li>
+<li>Upcoming releases</li>
+</ul>
+<p>Fill these in to clear the indicators. A complete profile helps the AI Assistant generate better copy.</p>
+<h3 id="artist-statuses">Artist Statuses</h3>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Active</strong></td>
+<td>Currently releasing and performing</td>
+</tr>
+<tr>
+<td><strong>Inactive</strong></td>
+<td>On hiatus, no current activity</td>
+</tr>
+<tr>
+<td><strong>Signed</strong></td>
+<td>Under active contract</td>
+</tr>
+<tr>
+<td><strong>Prospect</strong></td>
+<td>Being considered for signing</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="5-release-pipeline">5. Release Pipeline</h2>
+<h3 id="viewing-releases">Viewing Releases</h3>
+<p>Navigate to <strong>Releases</strong> (<code>/releases</code>). You&#39;ll see all releases with:</p>
+<ul>
+<li>Catalog number</li>
+<li>Title and artist</li>
+<li><strong>Status badge</strong> — where each release is in the pipeline</li>
+<li>Priority (Critical / High / Medium / Low)</li>
+<li>Release date</li>
+<li>Readiness percentage (orange progress bar)</li>
+<li>&quot;Needs Attention&quot; flag</li>
+</ul>
+<h3 id="release-statuses">Release Statuses</h3>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Draft</strong></td>
+<td>Initial creation, not yet in active pipeline</td>
+</tr>
+<tr>
+<td><strong>Mastering</strong></td>
+<td>Audio is being mastered</td>
+</tr>
+<tr>
+<td><strong>Artwork Pending</strong></td>
+<td>Waiting on cover art</td>
+</tr>
+<tr>
+<td><strong>Scheduled</strong></td>
+<td>Locked release date, all assets ready</td>
+</tr>
+<tr>
+<td><strong>Released</strong></td>
+<td>Live on platforms</td>
+</tr>
+<tr>
+<td><strong>Archived</strong></td>
+<td>Catalog item, no longer active</td>
+</tr>
+</tbody></table>
+<h3 id="creating-a-release">Creating a Release</h3>
+<ol>
+<li>Click <strong>+ New Release</strong></li>
+<li>Enter: Title, Artist, Catalog Number, Release Date, Genres</li>
+<li>Add tracks (title, duration, BPM, key, mastered status)</li>
+<li>Upload artwork</li>
+<li>The <strong>launch checklist</strong> auto-populates — mark items complete as you go</li>
+</ol>
+<h3 id="readiness-percentage">Readiness Percentage</h3>
+<p>The orange readiness bar shows how close a release is to launch. It&#39;s calculated from:</p>
+<ul>
+<li>Tracks mastered (% of tracks marked as mastered)</li>
+<li>Artwork uploaded (yes/no)</li>
+<li>Launch checklist completion (% of required items checked)</li>
+<li>Promo assets ready (yes/no)</li>
+<li>Distributor submission (yes/no)</li>
+</ul>
+<p><strong>Aim for 80%+</strong> two weeks before release date.</p>
+<h3 id="launch-checklist">Launch Checklist</h3>
+<p>Every release has a checklist with required and optional items. Required items block the readiness percentage. Typical items:</p>
+<ul>
+<li>Mastered WAV files received</li>
+<li>Artwork finalized (3000×3000px minimum)</li>
+<li>ISRC codes assigned</li>
+<li>Distributor metadata submitted</li>
+<li>Promo one-sheet written</li>
+<li>Social assets created</li>
+</ul>
+<h3 id="track-details">Track Details</h3>
+<p>Each track in a release stores:</p>
+<ul>
+<li>Title</li>
+<li>Duration (MM:SS)</li>
+<li>BPM and musical key (rendered in monospace)</li>
+<li>Mastered status (toggle)</li>
+</ul>
+<hr>
+<h2 id="6-rights--contracts">6. Rights &amp; Contracts</h2>
+<h3 id="viewing-contracts">Viewing Contracts</h3>
+<p>Navigate to <strong>Contracts</strong> (<code>/contracts</code>). You&#39;ll see all agreements with:</p>
+<ul>
+<li>Artist name</li>
+<li><strong>Contract type</strong> — Exclusive, Non-Exclusive, Distribution, Licensing</li>
+<li><strong>Status</strong> — Draft, Sent, Signed, Expired, Terminated</li>
+<li>Priority</li>
+<li>Signed date and expiry date</li>
+<li>Revenue share percentage</li>
+<li>GDPR and IPI compliance status</li>
+</ul>
+<h3 id="contract-types">Contract Types</h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Use Case</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Exclusive</strong></td>
+<td>Artist signs exclusively to your label</td>
+</tr>
+<tr>
+<td><strong>Non-Exclusive</strong></td>
+<td>Artist retains rights, label distributes specific releases</td>
+</tr>
+<tr>
+<td><strong>Distribution</strong></td>
+<td>Distribution-only deal, no rights transfer</td>
+</tr>
+<tr>
+<td><strong>Licensing</strong></td>
+<td>Sync licensing or sample clearance</td>
+</tr>
+</tbody></table>
+<h3 id="creating-a-contract">Creating a Contract</h3>
+<ol>
+<li>Click <strong>+ New Contract</strong></li>
+<li>Select the artist and contract type</li>
+<li>Set revenue share percentage (e.g., 50/50 = 50)</li>
+<li>Enter contract value, rights description, and notes</li>
+<li>Set signed date and expiry date (if known)</li>
+<li>Upload the signed PDF via the file uploader</li>
+<li>Click <strong>Save</strong></li>
+</ol>
+<h3 id="gdpr--ipi-status">GDPR &amp; IPI Status</h3>
+<p>Every contract tracks two compliance fields:</p>
+<ul>
+<li><strong>GDPR Status</strong> — Compliant / Pending / Not Applicable</li>
+<li><strong>IPI Status</strong> — Registered / Pending / Not Submitted</li>
+</ul>
+<p>These are important for EU-based labels. The system flags contracts where either status is &quot;Pending&quot; as needing attention.</p>
+<h3 id="contract-expiry">Contract Expiry</h3>
+<p>Contracts approaching expiry show a warning in the Dashboard and Notifications. Renew or terminate before the expiry date to keep your rights chain clean.</p>
+<hr>
+<h2 id="7-demo-inbox">7. Demo Inbox</h2>
+<h3 id="how-demos-arrive">How Demos Arrive</h3>
+<p>Demos come in via a <strong>public webhook endpoint</strong> (<code>/api/webhook/:uuid</code>). You can connect this to:</p>
+<ul>
+<li>A Make.com (Integromat) scenario that watches a Gmail inbox</li>
+<li>A custom submission form on your label&#39;s website</li>
+<li>A Typeform or Google Form with webhook forwarding</li>
+</ul>
+<p>Each submission captures: artist name, email, Instagram handle, track title, genre, duration, BPM, key, and a private listening link.</p>
+<h3 id="reviewing-demos">Reviewing Demos</h3>
+<ol>
+<li>Navigate to <strong>Demo Inbox</strong> (<code>/demo-inbox</code>)</li>
+<li>New demos show an animated &quot;new&quot; badge</li>
+<li>Click a demo to open its detail panel</li>
+<li><strong>Listen</strong> to the track via the private link</li>
+<li><strong>Rate</strong> the submission (star rating)</li>
+<li>Set <strong>Label Fit</strong> — Perfect / Good / Moderate / Poor</li>
+<li>Update the <strong>Status</strong>:</li>
+</ol>
+<h3 id="demo-statuses">Demo Statuses</h3>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Next Step</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>New</strong></td>
+<td>Unreviewed</td>
+<td>Listen and rate</td>
+</tr>
+<tr>
+<td><strong>Listening</strong></td>
+<td>Currently evaluating</td>
+<td>Finish your review</td>
+</tr>
+<tr>
+<td><strong>Interested</strong></td>
+<td>Want to follow up</td>
+<td>Contact the artist</td>
+</tr>
+<tr>
+<td><strong>Rejected</strong></td>
+<td>Not a fit</td>
+<td>Archived</td>
+</tr>
+<tr>
+<td><strong>Accepted</strong></td>
+<td>Signing the artist</td>
+<td>Create artist profile + contract</td>
+</tr>
+</tbody></table>
+<h3 id="demo-workflow">Demo Workflow</h3>
+<p>The recommended flow:</p>
+<ol>
+<li><strong>New</strong> → open, listen, rate</li>
+<li>If promising → <strong>Listening</strong> → set Label Fit → add notes</li>
+<li>If you want to sign → <strong>Interested</strong> → reach out to artist</li>
+<li>If you sign them → <strong>Accepted</strong> → create Artist profile + Contract</li>
+<li>If not a fit → <strong>Rejected</strong> (soft-deleted, restorable)</li>
+</ol>
+<hr>
+<h2 id="8-promo-campaigns">8. Promo Campaigns</h2>
+<h3 id="viewing-campaigns">Viewing Campaigns</h3>
+<p>Navigate to <strong>Promo Campaigns</strong> (<code>/promo</code>). Each campaign shows:</p>
+<ul>
+<li>Campaign name</li>
+<li>Linked release and artist</li>
+<li><strong>Status</strong> — Planning, Active, Completed, Paused</li>
+<li>Priority</li>
+<li>Start and end dates</li>
+<li>Target platforms</li>
+<li>Budget</li>
+<li>Impressions and engagements</li>
+<li>Readiness percentage</li>
+<li>Missing content flags</li>
+<li>Next action</li>
+</ul>
+<h3 id="creating-a-campaign">Creating a Campaign</h3>
+<ol>
+<li>Click <strong>+ New Campaign</strong></li>
+<li>Name the campaign and link it to a release</li>
+<li>Select target platforms (Instagram, Spotify, TikTok, Beatport, YouTube, etc.)</li>
+<li>Set budget, start date, and end date</li>
+<li>The <strong>campaign checklist</strong> auto-populates — mark items as you progress</li>
+</ol>
+<h3 id="campaign-checklist">Campaign Checklist</h3>
+<p>Each campaign tracks platform-specific deliverables:</p>
+<table>
+<thead>
+<tr>
+<th>Deliverable</th>
+<th>Status Options</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Promo Pool</td>
+<td>Not Started / In Progress / Done / N/A</td>
+</tr>
+<tr>
+<td>DJ Feedback</td>
+<td>Not Started / In Progress / Done / N/A</td>
+</tr>
+<tr>
+<td>Instagram Content</td>
+<td>Not Started / In Progress / Done / N/A</td>
+</tr>
+<tr>
+<td>YouTube Teaser</td>
+<td>Not Started / In Progress / Done / N/A</td>
+</tr>
+<tr>
+<td>Beatport Feature Pitch</td>
+<td>Not Started / In Progress / Done / N/A</td>
+</tr>
+<tr>
+<td>Spotify Pitch</td>
+<td>Not Started / In Progress / Done / N/A</td>
+</tr>
+<tr>
+<td>Email Blast</td>
+<td>Not Started / In Progress / Done / N/A</td>
+</tr>
+</tbody></table>
+<h3 id="campaign-readiness">Campaign Readiness</h3>
+<p>Similar to releases, campaigns have a readiness percentage. Missing content flags tell you what still needs to be created. Use the <strong>Content Engine</strong> (<code>/content</code>) to generate platform-specific copy for each deliverable.</p>
+<hr>
+<h2 id="9-calendar--tasks">9. Calendar &amp; Tasks</h2>
+<h3 id="viewing-tasks">Viewing Tasks</h3>
+<p>Navigate to <strong>Calendar</strong> (<code>/calendar</code>). Tasks are displayed with:</p>
+<ul>
+<li>Title and description</li>
+<li><strong>Status</strong> — Backlog, To Do, In Progress, Done</li>
+<li>Priority (Critical / High / Medium / Low)</li>
+<li>Category (Contract, Artwork, Mastering, Promo, Admin, Social, Distributor, Content)</li>
+<li>Due date</li>
+<li>Assignee</li>
+<li>Related entity (linked release, artist, campaign, or contract)</li>
+<li><strong>Overdue flag</strong> — red indicator if past due</li>
+</ul>
+<h3 id="creating-a-task">Creating a Task</h3>
+<ol>
+<li>Click <strong>+ New Task</strong></li>
+<li>Enter title, description, due date, priority, category, and assignee</li>
+<li>Optionally link it to a release, artist, campaign, or contract</li>
+<li>Click <strong>Save</strong></li>
+</ol>
+<h3 id="task-statuses">Task Statuses</h3>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Backlog</strong></td>
+<td>Not yet prioritized</td>
+</tr>
+<tr>
+<td><strong>To Do</strong></td>
+<td>Queued for this sprint/week</td>
+</tr>
+<tr>
+<td><strong>In Progress</strong></td>
+<td>Currently working on it</td>
+</tr>
+<tr>
+<td><strong>Done</strong></td>
+<td>Completed</td>
+</tr>
+</tbody></table>
+<h3 id="overdue-tasks">Overdue Tasks</h3>
+<p>Tasks past their due date with status ≠ Done show a red &quot;Overdue&quot; flag. These appear in the Dashboard under &quot;Deadlines Needing Attention.&quot;</p>
+<hr>
+<h2 id="10-revenue-tracking">10. Revenue Tracking</h2>
+<h3 id="viewing-revenue">Viewing Revenue</h3>
+<p>Navigate to <strong>Revenue</strong> (<code>/revenue</code>). You&#39;ll see:</p>
+<ul>
+<li><strong>Total Revenue</strong> — All-time earnings</li>
+<li><strong>Monthly Revenue</strong> — Current month</li>
+<li><strong>Pending Payouts</strong> — Earnings not yet distributed</li>
+<li><strong>Revenue by Artist</strong> — Proportion bars showing which artists generate the most</li>
+<li><strong>Revenue by Release</strong> — Proportion bars showing which releases earn the most</li>
+<li><strong>Currency</strong> — EUR (euro)</li>
+</ul>
+<h3 id="understanding-the-data">Understanding the Data</h3>
+<p>Revenue data comes from the <code>/api/revenue</code> endpoint. The system shows:</p>
+<ul>
+<li><strong>Monthly trend</strong> — Is revenue growing month-over-month?</li>
+<li><strong>Artist concentration</strong> — Are you too dependent on one artist?</li>
+<li><strong>Release performance</strong> — Which releases are your catalog workhorses?</li>
+</ul>
+<p>Use this surface to make signing and marketing decisions. If one artist generates 60% of revenue, you need to diversify. If one release from two years ago still earns, you have catalog value.</p>
+<hr>
+<h2 id="11-ai-assistant">11. AI Assistant</h2>
+<h3 id="what-it-does">What It Does</h3>
+<p>The AI Assistant generates copy and strategy, wired to your actual label data. It knows your artists, releases, and contracts — so it can produce context-aware output.</p>
+<h3 id="using-the-ai-assistant">Using the AI Assistant</h3>
+<ol>
+<li>Navigate to <strong>AI Assistant</strong> (<code>/ai</code>)</li>
+<li>Type your prompt — be specific about what you need:<ul>
+<li>&quot;Write a Spotify bio for [Artist Name] highlighting their last three releases&quot;</li>
+<li>&quot;Draft a press release for [Release Title]&quot;</li>
+<li>&quot;Suggest three promo strategies for our new signing [Artist Name]&quot;</li>
+<li>&quot;Summarize this quarter&#39;s releases for our newsletter&quot;</li>
+</ul>
+</li>
+<li>Click <strong>Generate</strong></li>
+<li>Review the output — it&#39;s saved as a draft</li>
+<li>Copy, edit, or regenerate as needed</li>
+</ol>
+<h3 id="provider-badges">Provider Badges</h3>
+<p>The output header shows which engine generated the text:</p>
+<table>
+<thead>
+<tr>
+<th>Badge Color</th>
+<th>Engine</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Cyan</td>
+<td>OpenRouter (Llama 3.3 70B)</td>
+</tr>
+<tr>
+<td>Emerald</td>
+<td>Workers AI</td>
+</tr>
+<tr>
+<td>Zinc</td>
+<td>Template (no AI key configured)</td>
+</tr>
+<tr>
+<td>Red</td>
+<td>Error</td>
+</tr>
+</tbody></table>
+<h3 id="tips">Tips</h3>
+<ul>
+<li>The more context you give, the better the output</li>
+<li>Artist names, release titles, and contract terms are pulled from your database — the AI has access to these</li>
+<li>Generate, then edit. The AI gives you a strong first draft; you add the human touch</li>
+</ul>
+<hr>
+<h2 id="12-content-engine">12. Content Engine</h2>
+<h3 id="what-makes-it-different">What Makes It Different</h3>
+<p>The <strong>Content Engine</strong> (<code>/content</code>) is distinct from the AI Assistant. It&#39;s purpose-built for <strong>platform-specific content</strong> — the AI Assistant handles general copy and strategy; the Content Engine handles channel-aware generation.</p>
+<h3 id="platform-selector">Platform Selector</h3>
+<p>Choose a platform from the dropdown. Each platform has specific rules:</p>
+<table>
+<thead>
+<tr>
+<th>Platform</th>
+<th>Character Cap</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Instagram</td>
+<td>220 chars</td>
+<td>Short-form social</td>
+</tr>
+<tr>
+<td>Spotify</td>
+<td>500 chars</td>
+<td>Artist bio / release description</td>
+</tr>
+<tr>
+<td>Beatport</td>
+<td>500 chars</td>
+<td>Store description</td>
+</tr>
+<tr>
+<td>TikTok</td>
+<td>220 chars</td>
+<td>Short-form video caption</td>
+</tr>
+<tr>
+<td>YouTube</td>
+<td>No cap</td>
+<td>Video description</td>
+</tr>
+<tr>
+<td>SoundCloud</td>
+<td>No cap</td>
+<td>Track description</td>
+</tr>
+<tr>
+<td>Radio</td>
+<td>No cap</td>
+<td>Radio one-sheet</td>
+</tr>
+<tr>
+<td>Press</td>
+<td>No cap</td>
+<td>Full press release</td>
+</tr>
+<tr>
+<td>Email</td>
+<td>No cap</td>
+<td>Newsletter / promo email</td>
+</tr>
+<tr>
+<td>Multi-channel</td>
+<td>Varies</td>
+<td>Batch generation across platforms</td>
+</tr>
+</tbody></table>
+<h3 id="using-the-content-engine">Using the Content Engine</h3>
+<ol>
+<li>Navigate to <strong>Content Engine</strong> (<code>/content</code>)</li>
+<li>Select the target <strong>Platform</strong></li>
+<li>Choose context: artist, release, or campaign (optional)</li>
+<li>Enter your prompt or topic</li>
+<li>Click <strong>Generate</strong></li>
+<li>The output respects the platform&#39;s character limits and style guidance</li>
+</ol>
+<h3 id="how-it-works">How It Works</h3>
+<p>The platform rules are injected into the LLM system prompt AND hard-capped in the template fallback. So even without an AI key, you get properly-sized output for your chosen platform.</p>
+<hr>
+<h2 id="13-settings">13. Settings</h2>
+<h3 id="accessing-settings">Accessing Settings</h3>
+<p>Navigate to <strong>Settings</strong> (<code>/settings</code>). This is where you configure your label.</p>
+<h3 id="what-you-can-configure">What You Can Configure</h3>
+<ul>
+<li><strong>Label Information</strong> — Name, logo, contact details</li>
+<li><strong>AI Providers</strong> — OpenRouter API key (either is optional — if neither is set, Workers AI is used)</li>
+<li><strong>Session Management</strong> — View your current session, sign out from all devices</li>
+<li><strong>Team Access</strong> — Manage users (admin only)</li>
+</ul>
+<h3 id="global-save">Global Save</h3>
+<p>Settings uses <strong>one global Save button</strong>. Edit any card, then click the single Save at the top. This prevents the ambiguity of &quot;which card did I just save?&quot; — a deliberate UX choice.</p>
+<h3 id="signing-out">Signing Out</h3>
+<p>You can sign out from two places:</p>
+<ol>
+<li><strong>User Menu</strong> (top-right avatar chip, available on every page)</li>
+<li><strong>Settings → Session Card</strong></li>
+</ol>
+<p>Both clear your token and redirect to the login page. There&#39;s no &quot;silent logout&quot; — you always know you&#39;re signed out.</p>
+<hr>
+<h2 id="14-security--access">14. Security &amp; Access</h2>
+<h3 id="authentication">Authentication</h3>
+<ul>
+<li>Login requires username + password</li>
+<li>Sessions use JWT tokens (7-day expiry)</li>
+<li>Failed login attempts are rate-limited (5 per 15 minutes per IP)</li>
+<li>The system uses timing-safe password comparison to prevent username enumeration</li>
+</ul>
+<h3 id="file-storage-1">File Storage</h3>
+<ul>
+<li>Artwork, contracts, and demo audio are stored in Cloudflare R2</li>
+<li>Files are served via the <code>/api/files/:key</code> endpoint</li>
+<li>Uploads require authentication</li>
+<li>Downloads can be public (for artwork/images) or authenticated (for contracts)</li>
+</ul>
+<h3 id="data-privacy">Data Privacy</h3>
+<ul>
+<li>Contract GDPR compliance is tracked per agreement</li>
+<li>IPI registration status is monitored</li>
+<li>No analytics or tracking beyond what&#39;s needed for the app to function</li>
+</ul>
+<hr>
+<h2 id="15-quick-reference">15. Quick Reference</h2>
+<h3 id="status-overview">Status Overview</h3>
+<table>
+<thead>
+<tr>
+<th>Entity</th>
+<th>Statuses</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Artists</td>
+<td>Active, Inactive, Signed, Prospect</td>
+</tr>
+<tr>
+<td>Releases</td>
+<td>Draft, Mastering, Artwork Pending, Scheduled, Released, Archived</td>
+</tr>
+<tr>
+<td>Contracts</td>
+<td>Draft, Sent, Signed, Expired, Terminated</td>
+</tr>
+<tr>
+<td>Demos</td>
+<td>New, Listening, Interested, Rejected, Accepted</td>
+</tr>
+<tr>
+<td>Campaigns</td>
+<td>Planning, Active, Completed, Paused</td>
+</tr>
+<tr>
+<td>Tasks</td>
+<td>Backlog, To Do, In Progress, Done</td>
+</tr>
+</tbody></table>
+<h3 id="priority-levels">Priority Levels</h3>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Use When</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Critical</strong></td>
+<td>Must be done today, blocking other work</td>
+</tr>
+<tr>
+<td><strong>High</strong></td>
+<td>Important, this week</td>
+</tr>
+<tr>
+<td><strong>Medium</strong></td>
+<td>Standard priority</td>
+</tr>
+<tr>
+<td><strong>Low</strong></td>
+<td>Nice to have, no urgency</td>
+</tr>
+</tbody></table>
+<h3 id="keyboard--navigation">Keyboard &amp; Navigation</h3>
+<ul>
+<li><strong>Click any card</strong> to open its detail view</li>
+<li><strong>Use the sidebar</strong> to switch between surfaces</li>
+<li><strong>Esc</strong> closes detail panels and modals</li>
+<li><strong>Click outside</strong> a detail panel to close it</li>
+</ul>
+<h3 id="getting-help">Getting Help</h3>
+<ul>
+<li>The Dashboard&#39;s AI Recommendations suggest actions you might want to take</li>
+<li>The Content Engine generates copy for every platform</li>
+<li>Missing info flags on artists and contracts tell you what&#39;s incomplete</li>
+<li>Notification bell in the header shows task due dates, contract expirations, and demo reviews</li>
+</ul>
+<hr>
+<p><em>AURA — A&amp;R Utility &amp; Revenue Assistant. Built for ORBEAT Records. Ready for your label.</em></p>
+
+</body>
+</html>
