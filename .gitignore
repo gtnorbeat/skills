@@ -23,3 +23,7 @@ docs-dist/
 log.txt
 apps/auralabels/test-results/
 handoff.md
+
+# Local AI context files
+aura-app.knowledge.md
+*.knowledge.md
