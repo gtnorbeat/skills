@@ -4,7 +4,7 @@ A Codebuff agent skill for music industry professionals handling A&R operations 
 
 ## Contents
 
-- `skills/ar-label-manager/SKILL.md` — the skill definition and instructions
+- `ar-label-manager/SKILL.md` — the skill definition and instructions
 - `LICENSE` — MIT license
 
 ## License

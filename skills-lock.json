@@ -2,9 +2,9 @@
   "version": 1,
   "skills": {
     "ar-label-manager": {
-      "source": "gtnorbeat/agent-skills",
+      "source": "gtnorbeat/skills",
       "sourceType": "github",
-      "skillPath": "skills/ar-label-manager/SKILL.md",
+      "skillPath": "ar-label-manager/SKILL.md",
       "computedHash": "ac11cce0719c08b95b49e2794c1d719e3119d5535440d0ed61c270c90b045aae"
     }
   }
