@@ -1,0 +1,19 @@
+node_modules
+.env
+.freebuff_memory.json
+*.freebuff_memory.json
+# Optional: stash any local override keys / memory stores here too.
+dist
+coverage
+.DS_Store
+.wrangler
+*.dev.vars
+npm-debug.log*
+
+
+.nx/cache
+.nx/workspace-data
+.nx/migrate-runs
+
+# Agent skills — local tooling, not versioned
+.agents/skills/
