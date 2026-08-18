@@ -76,6 +76,11 @@
       "source": "local",
       "sourceType": "local",
       "computedHash": "f41ab87a9034275d3f65c3672849bd0f8bdfe23e65550797e8004fb231aa9805"
+    },
+    "cross-platform-music-analytics": {
+      "source": "local",
+      "sourceType": "local",
+      "computedHash": "c464bbfcc3836c952bed57a1bcfbf3d018c97764b20e80b8e99e71c323d50c18"
     }
   }
 }

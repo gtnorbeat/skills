@@ -1,0 +1,11 @@
+{
+  "name": "cross-platform-music-analytics",
+  "version": "1.0.0",
+  "description": "Cross-platform music analytics & achievements aggregator following the Songstats model — 15+ platforms across streaming, social, DJ stores, discovery, and airplay.",
+  "category": "music",
+  "tags": ["music", "analytics", "charting", "streaming", "playlists", "songstats", "artist-tracking", "dj-support"],
+  "author": "local",
+  "license": "MIT",
+  "entrypoint": "SKILL.md",
+  "files": ["SKILL.md", "README.md", "manifest.json"]
+}
