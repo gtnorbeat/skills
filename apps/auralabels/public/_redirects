@@ -1,6 +1,0 @@
-# Cloudflare Pages redirects/rewrites
-# https://developers.cloudflare.com/pages/configuration/redirects/
-
-# SPA fallback — serve index.html for client-side routing
-# API requests (/api/*) are proxied to the AURA Worker via Pages Functions (functions/api/[[path]].ts)
-/* /index.html 200

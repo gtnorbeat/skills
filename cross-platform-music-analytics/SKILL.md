@@ -101,7 +101,7 @@ Use this exact template for every report. Adapt the emoji group markers to the c
 
 ## Example
 
-### 🎵 Aura Sunrise Global Analytics Report
+### 🎵 Neon Horizon Global Analytics Report
 
 #### 🎧 Streaming & Video Footprint
 - **Spotify**: 1.2M monthly listeners / 84K followers | **Apple Music**: 92 popularity index

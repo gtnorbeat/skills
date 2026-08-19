@@ -1,29 +1,14 @@
-node_modules
-.env
-.freebuff_memory.json
-*.freebuff_memory.json
-# Optional: stash any local override keys / memory stores here too.
-dist
-coverage
+# OS noise
 .DS_Store
-.wrangler
-*.dev.vars
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+
+# Node / deps
+node_modules/
 npm-debug.log*
 
-
-.nx/cache
-.nx/workspace-data
-.nx/migrate-runs
-
-# Agent skills — local tooling, not versioned
+# Local agent tooling (not versioned)
 .agents/skills/
-
-# Generated / local noise
-docs-dist/
-log.txt
-apps/auralabels/test-results/
-handoff.md
-
-# Local AI context files
-aura-app.knowledge.md
-*.knowledge.md
